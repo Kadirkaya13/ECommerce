@@ -28,6 +28,8 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
+
+
             var data = await _context.Products.Where(x=>x.Id==id).FirstOrDefaultAsync();
             return data;
         }
