@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Core.Abstract;
 
 namespace API.Controllers
 {
@@ -14,24 +15,25 @@ namespace API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private StoreContext _context;
-        public ProductsController(StoreContext context)
+        //private StoreContext _context;
+        private IProductRepository _iProductRepository;
+        public ProductsController(IProductRepository iProductRepository)
         {
-            _context = context;
+            _iProductRepository = iProductRepository;
         }
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var data =await  _context.Products.ToListAsync();
-            return data;
+            var data = await _iProductRepository.GetProductsAsync() ;
+            return Ok(data);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Product>> GetProductById(int id)
         {
 
 
-            var data = await _context.Products.Where(x=>x.Id==id).FirstOrDefaultAsync();
-            return data;
+            var data = await _iProductRepository.GetProductByIdAsync(id);
+            return Ok(data);
         }
     }
 }

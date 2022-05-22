@@ -1,0 +1,35 @@
+﻿using API.Core.Abstract;
+using API.Core.DbModel;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductTypeController : ControllerBase
+    {
+        private IProductTypeRepository _iProductTypeRepository;
+        public ProductTypeController(IProductTypeRepository iProductTypeRepository)
+        {
+            _iProductTypeRepository = iProductTypeRepository;
+        }
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            var data = await _iProductTypeRepository.GetProductTypesAsync();
+            return Ok(data);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductType>> GetProductTypeById(int id)
+        {
+            var data = await _iProductTypeRepository.GetProductTypeByIdAsync(id);
+            return Ok(data);
+        }
+    }
+}
+

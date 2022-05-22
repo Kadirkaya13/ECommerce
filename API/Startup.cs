@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using API.Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
+using API.Core.Abstract;
+using API.Infrastructure.Concrete;
 
 namespace API
 {
@@ -21,7 +23,9 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
             services.AddControllers();
             services.AddDbContext<StoreContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
