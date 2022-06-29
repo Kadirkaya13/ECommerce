@@ -13,21 +13,22 @@ namespace API.Controllers
     [ApiController]
     public class ProductTypeController : ControllerBase
     {
-        private IProductTypeRepository _iProductTypeRepository;
-        public ProductTypeController(IProductTypeRepository iProductTypeRepository)
+        //private IProductTypeRepository _iProductTypeRepository;
+        private IGenericRepository<ProductType> _productTypeRepository;
+        public ProductTypeController(IGenericRepository<ProductType> productTypeRepository)
         {
-            _iProductTypeRepository = iProductTypeRepository;
+            _productTypeRepository = productTypeRepository;
         }
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
-            var data = await _iProductTypeRepository.GetProductTypesAsync();
+            var data = await _productTypeRepository.ListAllAsync();
             return Ok(data);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductType>> GetProductTypeById(int id)
         {
-            var data = await _iProductTypeRepository.GetProductTypeByIdAsync(id);
+            var data = await _productTypeRepository.GetByIdAsync(id);
             return Ok(data);
         }
     }

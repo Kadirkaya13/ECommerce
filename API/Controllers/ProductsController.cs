@@ -16,15 +16,16 @@ namespace API.Controllers
     public class ProductsController : ControllerBase
     {
         //private StoreContext _context;
-        private IProductRepository _iProductRepository;
-        public ProductsController(IProductRepository iProductRepository)
+        //private IProductRepository _iProductRepository;
+        private IGenericRepository<Product> _productRepository;
+        public ProductsController(IGenericRepository<Product> productRepository)
         {
-            _iProductRepository = iProductRepository;
+            _productRepository = productRepository;
         }
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var data = await _iProductRepository.GetProductsAsync() ;
+            var data = await _productRepository.ListAllAsync();
             return Ok(data);
         }
         [HttpGet("{id}")]
@@ -32,7 +33,7 @@ namespace API.Controllers
         {
 
 
-            var data = await _iProductRepository.GetProductByIdAsync(id);
+            var data = await _productRepository.GetByIdAsync(id);
             return Ok(data);
         }
     }

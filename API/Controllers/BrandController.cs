@@ -13,15 +13,16 @@ namespace API.Controllers
     [ApiController]
     public class BrandController : ControllerBase
     {
-        private IBrandRepository _iBrandRepository;
-        public BrandController(IBrandRepository iBrandRepository)
+        //private IBrandRepository _iBrandRepository;
+        private IGenericRepository<Brand> _brandRepository;
+        public BrandController(IGenericRepository<Brand> brandRepository)
         {
-            _iBrandRepository = iBrandRepository;
+            _brandRepository = brandRepository;
         }
         [HttpGet]
         public async Task<ActionResult<List<Brand>>> GetBrands()
         {
-            var data = await _iBrandRepository.GetBrandsAsync();
+            var data = await _brandRepository.ListAllAsync();
             return Ok(data);
         }
         [HttpGet("{id}")]
@@ -29,7 +30,7 @@ namespace API.Controllers
         {
 
 
-            var data = await _iBrandRepository.GetBrandByIdAsync(id);
+            var data = await _brandRepository.GetByIdAsync(id);
             return Ok(data);
         }
     }
