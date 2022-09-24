@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace API.Core.Abstract
 {
-    public interface IGenericRepository<T> where T : BaseEntity 
+    public interface IGenericRepository<T> where T : BaseEntity ,new()
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> GetEntityWithSpec(ISpecification<T> spec);
-        Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
+        Task<IReadOnlyList<T>> ListWithSpecAsync(ISpecification<T> spec);
     }
 }

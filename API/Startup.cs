@@ -8,6 +8,7 @@ using API.Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
 using API.Core.Abstract;
 using API.Infrastructure.Concrete;
+using API.Helpers;
 
 namespace API
 {
@@ -27,6 +28,10 @@ namespace API
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
             services.AddScoped( typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddAutoMapper(typeof(MappingProfiles));
+
+
             services.AddControllers();
             services.AddDbContext<StoreContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>

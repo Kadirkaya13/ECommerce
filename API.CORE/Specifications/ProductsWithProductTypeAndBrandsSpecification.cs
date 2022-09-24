@@ -16,5 +16,11 @@ namespace API.Infrastructure.Data
             AddInclude(x => x.Brand);
             AddInclude(x => x.ProductType);
         }
+        public ProductsWithProductTypeAndBrandsSpecification(int id)
+            :base(x=>x.Id==id)
+        {
+            AddInclude(x => x.Brand);
+            AddInclude(x => x.ProductType);
+        }
     }
 }
