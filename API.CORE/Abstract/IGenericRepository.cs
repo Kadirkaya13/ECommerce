@@ -14,5 +14,8 @@ namespace API.Core.Abstract
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> GetEntityWithSpec(ISpecification<T> spec);
         Task<IReadOnlyList<T>> ListWithSpecAsync(ISpecification<T> spec);
+        Task<int> CountAsync(ISpecification<T> spec);
+
+
     }
 }
