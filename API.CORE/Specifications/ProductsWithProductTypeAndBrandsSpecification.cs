@@ -6,6 +6,8 @@ namespace API.Core.Specifications
     {
         public ProductsWithProductTypeAndBrandsSpecification(ProductSpecParams productSpecParams)
             : base(x =>
+            (string.IsNullOrWhiteSpace(productSpecParams.Search) || x.Name.ToLower().Contains(productSpecParams.Search))
+            &&
              (!productSpecParams.BrandId.HasValue || x.BrandId == productSpecParams.BrandId)
              &&
              (!productSpecParams.TypeId.HasValue || x.ProductTypeId == productSpecParams.TypeId))
