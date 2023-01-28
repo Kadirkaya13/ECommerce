@@ -4,27 +4,23 @@
             <h5 class="text-warning ml-3">Sort</h5>
             <select class="form-select my-3" (change)="onSortSelected(getValue($event))">
                 <option *ngFor="let sort of sortOptions" [value]="sort.value">{{sort.name}}</option>
-                
+
             </select>
             <h5 class="text-black my-3">Brands</h5>
             <ul class="list-group">
-                
-                <li class="list-group-item" *ngFor="let brand of brands" 
-                [class.active] = "brand.id === this.brandIdSelected"
-                [value] = "brand.id"
-                (click) = "onBrandSelected(brand.id)"
-                >{{brand.name}}</li>
-                
+
+                <li class="list-group-item" *ngFor="let brand of brands"
+                    [class.active]="brand.id === this.shopParams.brandId" [value]="brand.id"
+                    (click)="onBrandSelected(brand.id)">{{brand.name}}</li>
+
             </ul>
             <h5 class="text-Dark my-3">Types</h5>
             <ul class="list-group">
-                
+
                 <li class="list-group-item" *ngFor="let productType of productTypes"
-                [class.active] = "productType.id === this.typeIdSelected"
-                [value] = "productType.id"
-                (click) = "onTypeSelected(productType.id)"
-                >{{productType.name}}</li>
-                
+                    [class.active]="productType.id === this.shopParams.typeId" [value]="productType.id"
+                    (click)="onTypeSelected(productType.id)">{{productType.name}}</li>
+
             </ul>
         </section>
         <section class="col-9">
@@ -40,11 +36,23 @@
                 </div>
             </div>
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 " style="margin-bottom: 5px;">
                 <div class="col-3" *ngFor="let item of products">
-                    <app-product-item [product]= "item"></app-product-item>
+                    <app-product-item [product]="item"></app-product-item>
                 </div>
             </div>
+            <div class="d-flex justify-content-center">
+            <pagination 
+            [boundaryLinks]="true" 
+            [totalItems]="this.shopParams.totalCount" 
+            (pageChanged)="onPageChanged($event)"
+            [itemsPerPage]="this.shopParams.pageSize"
+            previousText="&lsaquo;" 
+            nextText="&rsaquo;"
+            firstText="&laquo;" 
+            lastText="&raquo;">
+            </pagination>
+        </div>
         </section>
     </div>
 </div>
