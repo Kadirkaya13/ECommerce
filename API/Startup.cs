@@ -30,6 +30,7 @@ namespace API
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSwaggerServices();
+            
 
             services.AddCors(opt =>
             {
@@ -56,6 +57,8 @@ namespace API
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

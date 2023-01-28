@@ -1,4 +1,5 @@
 import { IProduct } from "./IProduct";
+
 type Nullable<T> = T | null;
 
 export interface IPagination {

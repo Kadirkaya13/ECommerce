@@ -22,4 +22,14 @@
     <ProjectReference Include="..\API.Infrastructure\API.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Images\Products\camera.jpeg" />
+    <None Include="wwwroot\Images\Products\lighter.jpeg" />
+    <None Include="wwwroot\Images\Products\parfume.jpeg" />
+    <None Include="wwwroot\Images\Products\pena.jpeg" />
+    <None Include="wwwroot\Images\Products\sdcard.jpeg" />
+    <None Include="wwwroot\Images\Products\soap.jpeg" />
+    <None Include="wwwroot\Images\Products\watch.jpeg" />
+  </ItemGroup>
+
 </Project>

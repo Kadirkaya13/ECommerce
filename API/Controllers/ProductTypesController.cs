@@ -8,11 +8,11 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductTypeController : ControllerBase
+    public class ProductTypesController : ControllerBase
     {
         //private IProductTypeRepository _iProductTypeRepository;
         private IGenericRepository<ProductType> _productTypeRepository;
-        public ProductTypeController(IGenericRepository<ProductType> productTypeRepository)
+        public ProductTypesController(IGenericRepository<ProductType> productTypeRepository)
         {
             _productTypeRepository = productTypeRepository;
         }
