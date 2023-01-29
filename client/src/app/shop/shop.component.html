@@ -25,33 +25,32 @@
         </section>
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
-                <header>
-                    <span>Showing <strong>10</strong> of <strong>10</strong> Results</span>
-                </header>
-                <div class="form-inline mt-2">
+                <app-paging-header
+                [totalCount] = "this.shopParams.totalCount"
+                    [pageSize] = "this.shopParams.pageSize"
+                    [pageNumber] = "this.shopParams.pageNumber">
+                </app-paging-header>
+                <div class="row justify-content-center form-inline mt-2">
                     <input class="form-control" style="width: 300px" placeholder="Search" type="
             text" />
-                    <button class="btn btn-primary my-2">Search</button>
-                    <button class="btn btn-warning my-2">Reset</button>
+                    <button class="btn btn-outline-primary col-auto">Search</button>
+                    <button class="btn btn-outline-warning col-auto">Reset</button>
                 </div>
             </div>
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 " style="margin-bottom: 5px;">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 " style="margin-bottom: 15px;">
                 <div class="col-3" *ngFor="let item of products">
                     <app-product-item [product]="item"></app-product-item>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
-            <pagination 
-            [boundaryLinks]="true" 
-            [totalItems]="this.shopParams.totalCount" 
-            (pageChanged)="onPageChanged($event)"
-            [itemsPerPage]="this.shopParams.pageSize"
-            previousText="&lsaquo;" 
-            nextText="&rsaquo;"
-            firstText="&laquo;" 
-            lastText="&raquo;">
-            </pagination>
+            <div *ngIf="this.shopParams.totalCount && this.shopParams.totalCount > 0"  
+                class="d-flex justify-content-center">
+                <app-pager
+                [totalCount] = "this.shopParams.totalCount"
+                    [pageSize] = "this.shopParams.pageSize"
+                    [pageNumber] = "this.shopParams.pageNumber"
+                    (pageChanged)="onPageChanged($event)"
+                ></app-pager>
         </div>
         </section>
     </div>
